@@ -1,0 +1,25 @@
+{
+  "name": "be",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/khoicorn83/node_js_be#readme",
+  "bugs": {
+    "url": "https://github.com/khoicorn83/node_js_be/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khoicorn83/node_js_be.git"
+  },
+  "license": "ISC",
+  "author": "Khoi",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.1"
+  }
+}

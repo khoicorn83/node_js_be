@@ -49,3 +49,28 @@ export async function checkReaction(reactantIds, catalyst) {
 
     return rows[0];
 }
+
+// Lấy danh sách sản phẩm dựa trên ID Reaction
+export async function getReactionProducts(reactionId) {
+    try {
+        // Câu lệnh SQL kết nối bảng trung gian và bảng hóa chất để lấy thông tin chi tiết
+        const [rows] = await pool.query(`
+            SELECT 
+                c.ChemicalID, 
+                c.Formula, 
+                c.NameVN, 
+                rc.HeSo, 
+                c.Color, 
+                c.PhysicalState
+            FROM reactionschemicals rc
+            JOIN chemicals c ON rc.ChemicalID = c.ChemicalID
+            WHERE rc.ReactionID = ? AND rc.Role = 'Product'
+        `, [reactionId]);
+
+        // Trả về danh sách các hàng dữ liệu tìm thấy
+        return rows;
+    } catch (error) {
+        console.error("Lỗi khi lấy danh sách sản phẩm:", error);
+        throw error;
+    }
+}

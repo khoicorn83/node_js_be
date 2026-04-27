@@ -40,9 +40,10 @@ app.post('/api/mix', async (req, res) => {
                 });
             }
 
+            const reactionProducts = await db.getReactionProducts(reaction.ReactionID)
             res.send({
                 status: 'success',
-                data: reaction,
+                data: reactionProducts,
                 effect: reaction.DescriptionVN
             });
         } else {

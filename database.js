@@ -74,3 +74,22 @@ export async function getReactionProducts(reactionId) {
         throw error;
     }
 }
+
+// Lấy danh sách hệ số đúng dựa trên DisplayOrder
+export async function getCorrectCoefficientsOrdered(reactionId) {
+    try {
+        // Sắp xếp theo DisplayOrder để khớp với giao diện người dùng nhìn thấy
+        const [rows] = await pool.query(`
+            SELECT HeSo 
+            FROM reactionschemicals 
+            WHERE ReactionID = ? 
+            ORDER BY DisplayOrder ASC
+        `, [reactionId]);
+
+        // Trả về mảng số: [2, 1, 2]
+        return rows.map(row => row.HeSo);
+    } catch (error) {
+        console.error("Lỗi khi truy vấn hệ số:", error);
+        throw error;
+    }
+}
